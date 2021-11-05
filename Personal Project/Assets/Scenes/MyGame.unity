@@ -983,6 +983,8 @@ MonoBehaviour:
   horizontalInput: 0
   forwardInput: 0
   speed: 10
+  xRange: 15
+  zRange: 10
 --- !u!1 &1495436512
 GameObject:
   m_ObjectHideFlags: 0
