@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public float xRange = 25;
     public float zRange = 10;
+    public bool gameOver = false;
     
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,16 @@ public class PlayerController : MonoBehaviour
         if (transform.position.z < -zRange)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            gameOver = true;
+            Debug.Log("Game Over!");
         }
         
     }

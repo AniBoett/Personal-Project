@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject wallPrefab;
-    private Vector3 spawnPos = new Vector3(5, 0, 15);
+    private Vector3 spawnPos = new Vector3(5, 1, 15);
 
     // Start is called before the first frame update
     void Start()
