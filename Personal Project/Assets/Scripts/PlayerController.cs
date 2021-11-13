@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float zRange = 10;
     public bool gameOver = false;
     public bool hasPowerup;
+    private Rigidbody playerRb;
     
     // Start is called before the first frame update
     void Start()
@@ -60,11 +61,21 @@ public class PlayerController : MonoBehaviour
             gameOver = true;
             Debug.Log("Game Over!");
         }
-        //if player collides with powerup, give them boost!
-        else if (collision.gameObject.CompareTag("Powerup"))
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powerup"))
         {
             hasPowerup = true;
             Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
         }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
     }
 }
