@@ -14,6 +14,7 @@ public class DestroyOutOfBounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //destroy wall and bullets if they go out of bounds
         if (transform.position.z < lowerBound)
         {
             Destroy(gameObject);

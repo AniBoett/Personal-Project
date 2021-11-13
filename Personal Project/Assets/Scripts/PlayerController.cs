@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float xRange = 25;
     public float zRange = 10;
     public bool gameOver = false;
+    public bool hasPowerup;
     
     // Start is called before the first frame update
     void Start()
@@ -53,11 +54,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //if player collides with wall, game over!
         if (collision.gameObject.CompareTag("Wall"))
         {
             gameOver = true;
             Debug.Log("Game Over!");
         }
-        
+        //if player collides with powerup, give them boost!
+        else if (collision.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+        }
     }
 }

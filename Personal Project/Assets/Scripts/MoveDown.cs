@@ -17,6 +17,7 @@ public class MoveDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //walls and bullets move down until colliding with player
         if (playerControllerScript.gameOver == false)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
