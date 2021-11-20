@@ -18,8 +18,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //spawn walls when the 'S' key is pressed; placeholder, eventually walls will spawn automatically
-        if (Input.GetKeyDown(KeyCode.S))
+        //spawn walls when the 'C' key is pressed; placeholder, eventually walls will spawn automatically
+        if (Input.GetKeyDown(KeyCode.C))
         {
             int wallIndex = Random.Range(0, wallPrefabs.Length);
             Instantiate(wallPrefabs[wallIndex], spawnPos, wallPrefabs[wallIndex].transform.rotation);
