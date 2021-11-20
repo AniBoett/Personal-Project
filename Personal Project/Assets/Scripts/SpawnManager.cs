@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject wallPrefab;
     public GameObject[] wallPrefabs;
-    private Vector3 spawnPos = new Vector3(5, 1, 15);
+    private Vector3 spawnPos = new Vector3(5, 3, 15);
     public GameObject powerupPrefab;
 
     // Start is called before the first frame update
