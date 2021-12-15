@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool gameOver = false;
     public bool hasPowerup;
     private Rigidbody playerRb;
+    public GameObject powerupIndicator;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        
         //player can move freely
         if (gameOver == false)
         {
@@ -69,6 +72,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Debug.Log("Collided with" + collision.gameObject.name + "with powerup set to" + hasPowerup);
+            hasPowerup = false;
+            powerupIndicator.gameObject.SetActive(false);
         }
         
     }
@@ -79,6 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerup = true;
             Destroy(other.gameObject);
+            powerupIndicator.gameObject.SetActive(true);
             StartCoroutine(PowerupCountdownRoutine());
         }
     }
@@ -86,6 +92,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(7);
+        powerupIndicator.gameObject.SetActive(false);
         hasPowerup = false;
     }
 }
