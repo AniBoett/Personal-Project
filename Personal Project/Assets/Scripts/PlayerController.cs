@@ -25,11 +25,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //player can move freely
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.forward * forwardInput * Time.deltaTime * speed);
-        
+        if (gameOver == false)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            forwardInput = Input.GetAxis("Vertical");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            transform.Translate(Vector3.forward * forwardInput * Time.deltaTime * speed);
+        }
+
 
         //player stays inbounds
         if (transform.position.x > xRange)
@@ -56,11 +59,18 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //if player collides with wall, game over!
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") && hasPowerup == false)
         {
             gameOver = true;
             Debug.Log("Game Over!");
         }
+
+        if (collision.gameObject.CompareTag("Wall") && hasPowerup)
+        {
+            Destroy(collision.gameObject);
+            Debug.Log("Collided with" + collision.gameObject.name + "with powerup set to" + hasPowerup);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
