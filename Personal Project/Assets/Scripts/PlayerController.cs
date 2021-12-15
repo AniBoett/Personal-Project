@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     public bool gameOver = false;
     public bool hasPowerup;
     private Rigidbody playerRb;
+    public GameObject powerupPrefab;
     public GameObject powerupIndicator;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
 
     // Update is called once per frame
@@ -94,5 +95,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7);
         powerupIndicator.gameObject.SetActive(false);
         hasPowerup = false;
+        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+    }
+
+    private Vector3 GenerateSpawnPosition()
+    {
+        float spawnPosX = Random.Range(-xRange, xRange);
+        float spawnPosZ = Random.Range(-zRange,zRange);
+        Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
+        return randomPos;
     }
 }
