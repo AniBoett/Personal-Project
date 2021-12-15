@@ -10,11 +10,13 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerupPrefab;
     private float startDelay = 2;
     private float spawnInterval = 2.5f;
+    private PlayerController playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnRandomWall", startDelay, spawnInterval);
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,10 @@ public class SpawnManager : MonoBehaviour
     void SpawnRandomWall()
     //randomly spawn walls
     {
-        int wallIndex = Random.Range(0, wallPrefabs.Length);
-        Instantiate(wallPrefabs[wallIndex], spawnPos, wallPrefabs[wallIndex].transform.rotation);
+        if (playerControllerScript.gameOver == false)
+        {
+            int wallIndex = Random.Range(0, wallPrefabs.Length);
+            Instantiate(wallPrefabs[wallIndex], spawnPos, wallPrefabs[wallIndex].transform.rotation);
+        }
     }
 }
