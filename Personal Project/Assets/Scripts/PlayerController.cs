@@ -23,11 +23,16 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public GameObject titleScreen;
+    public AudioClip powerSound;
+    public AudioClip crashSound;
+    public AudioClip wallSound;
+    private AudioSource playerAudio;
     
     
     // Start is called before the first frame update
     void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         isGameActive = true;
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
         titleScreen.gameObject.SetActive(false);
@@ -83,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall") && hasPowerup == false)
         {
             gameOver = true;
+            playerAudio.PlayOneShot(crashSound, 1.0f);
             isGameActive = false;
             Debug.Log("Game Over!");
             gameOverText.gameObject.SetActive(true);
@@ -92,6 +98,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall") && hasPowerup)
         {
             Destroy(collision.gameObject);
+            playerAudio.PlayOneShot(wallSound, 1.0f);
             Debug.Log("Collided with" + collision.gameObject.name + "with powerup set to" + hasPowerup);
             hasPowerup = false;
             powerupIndicator.gameObject.SetActive(false);
@@ -104,6 +111,7 @@ public class PlayerController : MonoBehaviour
         //player can pick up powerup
         if (other.CompareTag("Powerup"))
         {
+            playerAudio.PlayOneShot(powerSound, 1.0f);
             hasPowerup = true;
             Destroy(other.gameObject);
             powerupIndicator.gameObject.SetActive(true);
