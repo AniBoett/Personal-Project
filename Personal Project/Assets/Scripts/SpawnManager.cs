@@ -26,9 +26,9 @@ public class SpawnManager : MonoBehaviour
     }
 
     void SpawnRandomWall()
-    //randomly spawn walls
+    //randomly spawn walls while game is active
     {
-        if (playerControllerScript.gameOver == false)
+        if (playerControllerScript.isGameActive == true)
         {
             int wallIndex = Random.Range(0, wallPrefabs.Length);
             Instantiate(wallPrefabs[wallIndex], spawnPos, wallPrefabs[wallIndex].transform.rotation);
